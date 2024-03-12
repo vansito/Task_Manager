@@ -35,24 +35,26 @@ def reg_user():
     # - Request input of a new password
     new_password = input("New Password: ")
 
-    # - Request input of password confirmation.
-    confirm_password = input("Confirm Password: ")
+    while True:
+        # - Request input of password confirmation.
+        confirm_password = input("Confirm Password: ")
 
-    # - Check if the new password and confirmed password are the same.
-    if new_password == confirm_password:
-        # - If they are the same, add them to the user.txt file,
-        print("New user added")
-        username_password[new_username] = new_password
-        
-        with open("user.txt", "w") as out_file:
-            user_data = []
-            for k in username_password:
-                user_data.append(f"{k};{username_password[k]}")
-            out_file.write("\n".join(user_data))
+        # - Check if the new password and confirmed password are the same.
+        if new_password == confirm_password:
+            # - If they are the same, add them to the user.txt file,
+            print("\nNew user added!")
+            username_password[new_username] = new_password
+            
+            with open("user.txt", "w") as out_file:
+                user_data = []
+                for k in username_password:
+                    user_data.append(f"{k};{username_password[k]}")
+                out_file.write("\n".join(user_data))
+            break
 
-    # - Otherwise you present a relevant message.
-    else:
-        print("Passwords do not match")
+        # - Otherwise you present a relevant message.
+        else:
+            print("Passwords do not match, please try again.")
 
 
 def add_task():
@@ -70,8 +72,9 @@ def add_task():
 
         if task_username not in username_password.keys():
             print("User does not exist. Please enter a valid username")
-            task_username = input("Name of person assigned to task: ")
-        present = False
+        
+        else:
+            present = False
 
     task_title = input("Title of Task: ")
     task_description = input("Description of Task: ")
@@ -162,7 +165,6 @@ def view_mine():
     # Output of the list of tasks for the user to choose
     count = 0
     task_dict = {}
-    green_light = True
     for index,t in enumerate(task_list):
         if curr_user in t['username']:
             count += 1
