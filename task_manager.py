@@ -1,10 +1,3 @@
-# Notes: 
-# 1. Use the following username and password to access the admin rights 
-# username: admin
-# password: password
-# 2. Ensure you open the whole folder for this task in VS Code otherwise the 
-# program will look in your root directory for the text files.
-
 #=====importing libraries===========
 import os
 from datetime import datetime, date
@@ -59,7 +52,7 @@ def reg_user():
 
     # - Otherwise you present a relevant message.
     else:
-        print("Passwords do no match")
+        print("Passwords do not match")
 
 
 def add_task():
@@ -424,28 +417,28 @@ def reports():
 
 
 def generate_files_if_not_exist():
-    """Function to generate tasks.txt and user.txt
+    """Function to generate tasks_overview.txt and user_overview.txt
         if they don't exist"""
 
-    if not os.path.exists("tasks.txt"):
-        pass  
-    if not os.path.exists("user.txt"):
-        with open("user.txt", "w") as default_file:
-            default_file.write("admin;password")
+    if not os.path.exists("task_overview.txt"):
+        with open("task_overview.txt", "w+") as task_over:
+            pass
+
+    if not os.path.exists("user_overview.txt"):
+        with open("user_overview.txt", "w") as user_over:
+            pass
 
 
 def statistics():
     '''Function that allows the admin to display statistics about number of users
             and tasks.'''
 
-    # Check if the user is admin and display statistics
-    if menu == 'ds' and curr_user == 'admin':
-        # Generate files if they don't exist
-        generate_files_if_not_exist()
+    # Generate files if they don't exist
+    generate_files_if_not_exist()
 
-        # Read content from tasks.txt and user.txt
-        
-        reports()
+    # Read content from tasks.txt and user.txt
+    
+    reports()
 
 # Task list
 task_list = []
